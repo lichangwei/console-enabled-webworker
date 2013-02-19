@@ -1,10 +1,13 @@
 
+(function(){
+// cannot put it ouside clousure and change to var console;
+// or it will overwrite window.sonsole in IE.
 this.console = this.console || {};
 
-(function(){
-
+// what methods in console would be enabled.
 var fields = 'log debug info error time timeEnd'.split(' ');
 
+// to judge me loaded in html file or in webworker.
 var insideWorker = typeof window !== 'object';
 
 if( insideWorker ){
@@ -22,9 +25,9 @@ if( insideWorker ){
     if(!this.consoleable){
       this.consoleable = true;
       orignal.call(this, 'message', function(e){
-        var data = e.data;
+        var data   = e.data;
         var method = data.__msg;
-        var args = data.__data;
+        var args   = data.__data;
         if(!method || !args) return;
         if(typeof console[method] === 'function'){
           console[method].apply(console, args);
