@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Enable console object in web workers</title>
+  </head>
+  <body>
+    <script src="../console-enabled-webworker.js"></script>
+    <script>
+      var worker = new Worker('worker.js');
+      worker.postMessage({
+        id: 1,
+        task: 'summation',
+        begin: 1,
+        end: 100000
+      });
+      worker.addEventListener('message', function(e){
+        console.log(e.data);
+      });
+    </script>
+  </body>
+</html>
