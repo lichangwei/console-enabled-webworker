@@ -40,6 +40,7 @@ if( insideWorker ){
     });
     return worker;
   };
+  this.Worker.prototype = OriginalWorker.prototype;
 }
 
 })();
