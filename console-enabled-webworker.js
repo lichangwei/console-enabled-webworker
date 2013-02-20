@@ -20,22 +20,25 @@ if( insideWorker ){
     };
   });
 }else{
-  var orignal = Worker.prototype.addEventListener;
-  Worker.prototype.addEventListener = function(message, callback){
-    if(!this.consoleable){
-      this.consoleable = true;
-      orignal.call(this, 'message', function(e){
-        var data   = e.data;
-        var method = data.__msg;
-        var args   = data.__data;
-        if(!method || !args) return;
-        if(typeof console[method] === 'function'){
-          console[method].apply(console, args);
-        }
-        e.stopImmediatePropagation();
-      });
-    }
-    orignal.call(this, message, callback);
+  // current browser dosen't support web worker, do nothing.
+  if(!this.Worker) return;
+
+  var OriginalWorker = Worker;
+  this.Worker = function(url){
+    var worker = new OriginalWorker(url);
+    // for each worker instance, we call onmessage at first.
+    // if a message is a console message, then we handle it and don't pass it to user's handler.
+    worker.addEventListener('message', function(e){
+      var data   = e.data;
+      var method = data.__msg;
+      var args   = data.__data;
+      if(!method || !args) return;
+      if(typeof console[method] === 'function'){
+        console[method].apply(console, args);
+      }
+      e.stopImmediatePropagation();
+    });
+    return worker;
   };
 }
 
