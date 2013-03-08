@@ -41,6 +41,8 @@ if( insideWorker ){
     return worker;
   };
   this.Worker.prototype = OriginalWorker.prototype;
+
+  this.Worker.version = '1.0';
 }
 
 })();
