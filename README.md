@@ -3,7 +3,7 @@ console-enabled-webworker
 
 To enable console object inside web workers  
 
-**Usage**  
+## Usage  
 1) Inculde script in html file.
 ```html
 <script src="console-enabled-webworker.js"></script>
@@ -16,3 +16,8 @@ importScripts('console-enabled-webworker.js');
 ```javascript
 console.log('result: ' + result);
 ```
+
+## Change Log:
+**V1.0 (Initial Version)**
+  Allow call console.log/debug/info/error/time/timeEnd methods inside web worker.
+
