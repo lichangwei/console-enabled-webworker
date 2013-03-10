@@ -16,8 +16,9 @@ importScripts('console-enabled-webworker.js');
 ```javascript
 console.log('result: ' + result);
 ```
+4）(Optional) Remove script tag in your html file and console.log etc. in your web worker scripts.
 
 ## Change Log:
-**V1.0 (Initial Version)**
-  Allow call console.log/debug/info/error/time/timeEnd methods inside web worker.
+**V1.0 (Initial Version)**  
+  Allow calling console.log/debug/info/error/time/timeEnd methods inside web worker.
 
